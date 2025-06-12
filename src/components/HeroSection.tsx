@@ -209,7 +209,7 @@ const HeroSection: React.FC = () => {
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  マンガ
+                 スミストレ
                 </motion.span>
                 <br />
                 <motion.span
@@ -222,7 +222,7 @@ const HeroSection: React.FC = () => {
                   }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
                 >
-                  クラブ
+                  ーション
                 </motion.span>
               </motion.h1>
 
@@ -285,7 +285,7 @@ const HeroSection: React.FC = () => {
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
-                  Creating beautiful manga-style illustrations and bringing characters to life through digital art.
+Someone who likes to sketch during his free time
                 </motion.span>
               </motion.p>
 

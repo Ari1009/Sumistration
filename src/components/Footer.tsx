@@ -4,8 +4,8 @@ import { Instagram, Github, Palette } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { icon: Instagram, label: 'Instagram', href: '#', color: 'bg-manga-red' },
-    { icon: Github, label: 'GitHub', href: '#', color: 'bg-manga-text' },
+    { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/arihant09/', color: 'bg-manga-red' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/Ari1009', color: 'bg-manga-text' },
     { icon: Palette, label: 'ArtStation', href: '#', color: 'bg-manga-purple' }
   ]
 
@@ -30,8 +30,9 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2, type: "spring", bounce: 0.5 }}
             viewport={{ once: true }}
           >
-            マンガクラブ
-          </motion.h2>
+
+スミストレーション        
+  </motion.h2>
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-8">
@@ -71,7 +72,7 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
           >
             <p className="font-zen text-manga-text">
-              Thank you for visiting my manga world! ✨
+              Thank you for visiting my Art portfolio! ✨
             </p>
           </motion.div>
 
@@ -83,7 +84,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 1 }}
             viewport={{ once: true }}
           >
-            Made with ❤️ by Manga Artist • © 2024 All rights reserved
+            Made with ❤️ by Manga Artist •
           </motion.p>
 
           {/* Floating Decorations */}
