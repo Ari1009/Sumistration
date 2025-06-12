@@ -1,12 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Instagram, Github, Palette } from 'lucide-react'
+import { Instagram, Github, Mail } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const socialLinks = [
     { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/arihant09/', color: 'bg-manga-red' },
     { icon: Github, label: 'GitHub', href: 'https://github.com/Ari1009', color: 'bg-manga-text' },
-    { icon: Palette, label: 'ArtStation', href: '#', color: 'bg-manga-purple' }
+    { icon: Mail, label: 'Gmail', href: 'mailto:arihant09pal@gmail.com', color: 'bg-manga-purple' }
   ]
 
   return (
@@ -30,8 +30,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2, type: "spring", bounce: 0.5 }}
             viewport={{ once: true }}
           >
-
-スミストレーション        
+Contact me through
   </motion.h2>
 
           {/* Social Links */}
@@ -84,7 +83,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 1 }}
             viewport={{ once: true }}
           >
-            Made with ❤️ by Manga Artist •
+           • Created by Ari1009 •
           </motion.p>
 
           {/* Floating Decorations */}
