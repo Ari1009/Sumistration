@@ -4,10 +4,37 @@ import { Instagram, Github, Mail } from 'lucide-react'
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/arihant09/', color: 'bg-manga-red' },
-    { icon: Github, label: 'GitHub', href: 'https://github.com/Ari1009', color: 'bg-manga-text' },
-    { icon: Mail, label: 'Gmail', href: 'mailto:arihant09pal@gmail.com', color: 'bg-manga-purple' }
+    { 
+      icon: Instagram, 
+      label: 'Instagram', 
+      href: 'https://www.instagram.com/arihant09/', 
+      color: 'bg-manga-red' 
+    },
+    { 
+      icon: Github, 
+      label: 'GitHub', 
+      href: 'https://github.com/Ari1009', 
+      color: 'bg-manga-text' 
+    },
+    { 
+      icon: Mail, 
+      label: 'Gmail', 
+      color: 'bg-manga-purple',
+      action: () => {
+        // Double approach for maximum compatibility
+        window.location.href = 'mailto:arihant09pal@gmail.com';
+        window.open('mailto:arihant09pal@gmail.com', '_blank');
+      }
+    }
   ]
+
+  const handleSocialClick = (social: any) => {
+    if (social.action) {
+      social.action();
+    } else {
+      window.open(social.href, '_blank');
+    }
+  }
 
   return (
     <footer className="bg-manga-dark py-12 relative overflow-hidden">
@@ -30,17 +57,17 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2, type: "spring", bounce: 0.5 }}
             viewport={{ once: true }}
           >
-Contact me through
-  </motion.h2>
+            Contact me through
+          </motion.h2>
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-8">
             {socialLinks.map((social, index) => {
               const Icon = social.icon
               return (
-                <motion.a
+                <motion.button
                   key={social.label}
-                  href={social.href}
+                  onClick={() => handleSocialClick(social)}
                   className={`${social.color} w-12 h-12 rounded-full flex items-center justify-center text-white manga-panel group`}
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
@@ -55,9 +82,10 @@ Contact me through
                     rotate: 360
                   }}
                   viewport={{ once: true }}
+                  aria-label={social.label}
                 >
                   <Icon size={20} />
-                </motion.a>
+                </motion.button>
               )
             })}
           </div>
