@@ -61,7 +61,7 @@ function App() {
   }, [selectedCategory])
 
   return (
-    <div className="min-h-screen bg-manga-beige">
+    <div className="min-h-screen bg-manga-beige overflow-x-hidden"> {/* ADDED: overflow-x-hidden */}
       {/* Navigation */}
       <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
 
@@ -74,6 +74,7 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5 }}
+            className="overflow-x-hidden" // ADDED: Prevent gallery overflow
           >
             <Gallery 
               category={selectedCategory} 
@@ -87,6 +88,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            className="overflow-x-hidden" // ADDED: Prevent content overflow
           >
             <HeroSection />
             <JourneySection />

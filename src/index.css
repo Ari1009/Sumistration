@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ADDED: Global overflow control */
+body {
+  overflow-x: hidden;
+}
+
+/* ADDED: Box-sizing reset for all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
