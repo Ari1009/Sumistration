@@ -134,23 +134,23 @@ const CropModal: React.FC<CropModalProps> = ({ imageUrl, onClose }) => {
   }
 
   return (
-    <motion.div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+    <motion.div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-2 md:p-4"
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
 
       <motion.div className="manga-panel bg-white rounded-2xl max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col"
         initial={{ scale: 0.8, rotate: -5 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0.8, rotate: 5 }} transition={{ type: 'spring', bounce: 0.4 }}>
 
-        <div className="flex items-center justify-between p-6 border-b-4 border-manga-border flex-shrink-0">
-          <h2 className="font-manga font-bold text-2xl text-manga-text">Crop Your Illustration</h2>
+        <div className="flex items-center justify-between p-4 md:p-6 border-b-4 border-manga-border flex-shrink-0">
+          <h2 className="font-manga font-bold text-xl md:text-2xl text-manga-text">Crop Your Illustration</h2>
           <motion.button onClick={onClose} className="p-2 hover:bg-manga-beige rounded-full transition-colors" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <X size={24} />
           </motion.button>
         </div>
 
-        <div className="p-6 flex-1 overflow-y-auto">
+        <div className="p-4 md:p-6 flex-1 overflow-y-auto">
 
           {error && (
-            <motion.div className="mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl flex items-start space-x-3"
+            <motion.div className="mb-4 md:mb-6 p-4 bg-red-50 border-2 border-red-200 rounded-xl flex items-start space-x-3"
               initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
               <AlertCircle className="text-red-500 mt-0.5 flex-shrink-0" size={20} />
               <div className="flex-1">
@@ -160,18 +160,18 @@ const CropModal: React.FC<CropModalProps> = ({ imageUrl, onClose }) => {
             </motion.div>
           )}
 
-          <div className="mb-6">
+          <div className="mb-4 md:mb-6">
             <h3 className="font-zen font-bold text-lg text-manga-text mb-4">Choose Size:</h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 md:gap-3">
               {cropSizes.map(size => {
                 const Icon = size.icon
                 return (
                   <motion.button key={size.name} onClick={() => setSelectedSize(size)}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-full border-2 transition-all ${selectedSize.name === size.name ? 'border-manga-red bg-manga-red text-white' : 'border-manga-border text-manga-text hover:bg-manga-beige'}`}>
-                    <Icon size={16} />
+                    className={`flex items-center justify-center space-x-1 md:space-x-2 px-2 md:px-4 py-2 rounded-full border-2 transition-all text-sm md:text-base ${selectedSize.name === size.name ? 'border-manga-red bg-manga-red text-white' : 'border-manga-border text-manga-text hover:bg-manga-beige'}`}>
+                    <Icon size={14} className="md:w-4 md:h-4" />
                     <span className="font-zen font-medium">{size.name}</span>
                     {size.width && size.height && (
-                      <span className="text-sm opacity-75">{size.width}×{size.height}</span>
+                      <span className="text-xs opacity-75 hidden md:inline">{size.width}×{size.height}</span>
                     )}
                   </motion.button>
                 )
@@ -180,7 +180,7 @@ const CropModal: React.FC<CropModalProps> = ({ imageUrl, onClose }) => {
           </div>
 
           {selectedSize.name !== 'No Crop' && (
-            <div className="relative h-80 md:h-96 bg-manga-beige rounded-xl overflow-hidden manga-panel mb-6">
+            <div className="relative h-64 md:h-80 lg:h-96 bg-manga-beige rounded-xl overflow-hidden manga-panel mb-4 md:mb-6">
               <Cropper
                 image={imageUrl}
                 crop={crop}
@@ -204,10 +204,12 @@ const CropModal: React.FC<CropModalProps> = ({ imageUrl, onClose }) => {
           )}
         </div>
 
-        <div className="p-6 border-t-2 border-manga-border bg-white flex-shrink-0">
+        <div className="p-4 md:p-6 border-t-2 border-manga-border bg-white flex-shrink-0">
           <motion.button onClick={handleDownload}
-            className="w-full manga-panel bg-manga-green text-white py-4 rounded-xl flex items-center justify-center space-x-2 font-zen font-bold text-lg">
-            <Download size={24} />
+            className="w-full manga-panel bg-manga-green text-white py-3 md:py-4 rounded-xl flex items-center justify-center space-x-2 font-zen font-bold text-base md:text-lg"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}>
+            <Download size={20} className="md:w-6 md:h-6" />
             <span>Download {selectedSize.name} Version</span>
           </motion.button>
         </div>

@@ -86,41 +86,45 @@ const Gallery: React.FC<GalleryProps> = ({ category, onBack }) => {
   }
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${categoryInfo[category].bg} py-20 relative`}>
+    <div className={`min-h-screen bg-gradient-to-br ${categoryInfo[category].bg} pt-24 pb-8 relative`}>
       {/* Background Pattern */}
       <div className="absolute inset-0 halftone-bg"></div>
+      
+      {/* Sticky Back Button */}
+      <motion.div
+        className="fixed top-20 left-4 z-40"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.button
+          onClick={onBack}
+          className="manga-panel bg-white/95 backdrop-blur-sm px-4 md:px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-manga-beige transition-colors shadow-lg"
+          whileHover={{ scale: 1.05, x: -5 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ArrowLeft size={20} />
+          <span className="hidden md:inline font-zen font-medium">Back</span>
+        </motion.button>
+      </motion.div>
       
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
-          className="flex items-center justify-between mb-12"
+          className="text-center mb-12"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.button
-            onClick={onBack}
-            className="manga-panel bg-white px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-manga-beige transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ArrowLeft size={20} />
-            <span className="font-zen font-medium">Back</span>
-          </motion.button>
-
-          <div className="text-center">
-            <h1 className="font-manga font-bold text-4xl text-manga-text mb-2">
-              {categoryInfo[category].title}
-            </h1>
-            <span className="text-4xl">{categoryInfo[category].emoji}</span>
-          </div>
-
-          <div className="w-24"></div> {/* Spacer for centering */}
+          <h1 className="font-manga font-bold text-3xl md:text-4xl text-manga-text mb-2">
+            {categoryInfo[category].title}
+          </h1>
+          <span className="text-4xl">{categoryInfo[category].emoji}</span>
         </motion.div>
 
         {/* Gallery Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -128,7 +132,7 @@ const Gallery: React.FC<GalleryProps> = ({ category, onBack }) => {
           {illustrations.map((illustration, index) => (
             <motion.div
               key={illustration.id}
-              className="manga-panel bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden group cursor-pointer"
+              className="manga-panel bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden group cursor-pointer relative"
               initial={{ 
                 scale: 0,
                 rotate: -10
@@ -152,12 +156,12 @@ const Gallery: React.FC<GalleryProps> = ({ category, onBack }) => {
                 <img
                   src={illustration.image_url}
                   alt={illustration.name}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-48 md:h-64 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 
-                {/* Hover Overlay */}
+                {/* Desktop Hover Overlay */}
                 <motion.div
-                  className="absolute inset-0 bg-manga-text/80 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="hidden md:flex absolute inset-0 bg-manga-text/80 flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                 >
@@ -175,6 +179,22 @@ const Gallery: React.FC<GalleryProps> = ({ category, onBack }) => {
                     <span className="font-zen font-medium">Download</span>
                   </motion.button>
                 </motion.div>
+
+                {/* Mobile Download Button - Always Visible */}
+                <div className="md:hidden absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                  <h3 className="font-zen font-bold text-white text-lg mb-2 text-center">
+                    {illustration.name}
+                  </h3>
+                  <motion.button
+                    onClick={() => handleDownload(illustration.image_url)}
+                    className="w-full bg-manga-red text-white py-3 px-4 rounded-full flex items-center justify-center space-x-2 font-zen font-medium"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Download size={18} />
+                    <span>Download</span>
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -188,9 +208,9 @@ const Gallery: React.FC<GalleryProps> = ({ category, onBack }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="manga-panel bg-white/95 backdrop-blur-sm rounded-2xl p-12 max-w-md mx-auto">
-              <span className="text-6xl mb-4 block">{categoryInfo[category].emoji}</span>
-              <h3 className="font-manga font-bold text-2xl text-manga-text mb-4">
+            <div className="manga-panel bg-white/95 backdrop-blur-sm rounded-2xl p-8 md:p-12 max-w-md mx-auto">
+              <span className="text-4xl md:text-6xl mb-4 block">{categoryInfo[category].emoji}</span>
+              <h3 className="font-manga font-bold text-xl md:text-2xl text-manga-text mb-4">
                 No illustrations yet
               </h3>
               <p className="font-zen text-manga-text/80">
